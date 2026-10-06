@@ -1,0 +1,2437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AquaSmart - Smart Water Billing System</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Remix Icons -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css"
+        rel="stylesheet"
+    >
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- =========================================================
+     LOGIN PAGE
+========================================================= -->
+
+<div id="loginPage" class="login-page">
+
+    <div class="water-bubbles">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <button class="login-theme-btn" id="loginThemeBtn">
+        <i class="ri-moon-line"></i>
+    </button>
+
+    <div class="login-container">
+
+        <div class="login-brand">
+            <div class="brand-logo large">
+                <i class="ri-drop-fill"></i>
+            </div>
+
+            <h1>Aqua<span>Smart</span></h1>
+
+            <p>
+                Smart Water Billing & Monitoring
+            </p>
+        </div>
+
+        <div class="login-card">
+
+            <div class="login-heading">
+                <h2>Welcome Back</h2>
+                <p>Sign in to your water management dashboard</p>
+            </div>
+
+            <form id="loginForm">
+
+                <div class="input-group">
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <div class="input-wrapper">
+                        <i class="ri-mail-line"></i>
+
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="Enter your email"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <div class="input-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <div class="input-wrapper">
+                        <i class="ri-lock-line"></i>
+
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="Enter your password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            id="passwordToggle"
+                        >
+                            <i class="ri-eye-line"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="login-options">
+
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="rememberMe">
+                        <span>Remember me</span>
+                    </label>
+
+                    <a href="#" onclick="return false;">
+                        Forgot password?
+                    </a>
+
+                </div>
+
+                <button class="login-btn" type="submit">
+
+                    <span>Sign In</span>
+
+                    <i class="ri-arrow-right-line"></i>
+
+                </button>
+
+                <div class="demo-login">
+
+                    <div class="demo-title">
+                        <i class="ri-information-line"></i>
+                        Demo Credentials
+                    </div>
+
+                    <div class="demo-row">
+                        <span>Customer</span>
+                        <button
+                            type="button"
+                            onclick="fillCustomerLogin()"
+                        >
+                            Use Demo
+                        </button>
+                    </div>
+
+                    <div class="demo-row">
+                        <span>Admin</span>
+                        <button
+                            type="button"
+                            onclick="fillAdminLogin()"
+                        >
+                            Use Demo
+                        </button>
+                    </div>
+
+                    <small>
+                        Customer: customer@aquasmart.com / customer123
+                        <br>
+                        Admin: admin@aquasmart.com / admin123
+                    </small>
+
+                </div>
+
+            </form>
+
+        </div>
+
+        <div class="login-footer">
+
+            <span>
+                <i class="ri-shield-check-line"></i>
+                Secure Prototype
+            </span>
+
+            <span>
+                <i class="ri-cpu-line"></i>
+                AI Powered Insights
+            </span>
+
+            <span>
+                <i class="ri-water-flash-line"></i>
+                Smart Monitoring
+            </span>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     MAIN APPLICATION
+========================================================= -->
+
+<div id="app" class="app hidden">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <div class="sidebar-brand">
+
+            <div class="brand-logo">
+                <i class="ri-drop-fill"></i>
+            </div>
+
+            <div>
+                <h2>Aqua<span>Smart</span></h2>
+                <small>Water Management</small>
+            </div>
+
+        </div>
+
+        <div class="prototype-badge">
+            <span class="live-dot"></span>
+            Prototype • Simulated Data
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <p class="nav-label">MAIN</p>
+
+            <button class="nav-item active" data-page="dashboard">
+                <i class="ri-dashboard-3-line"></i>
+                <span>Dashboard</span>
+            </button>
+
+            <button class="nav-item" data-page="usage">
+                <i class="ri-bar-chart-box-line"></i>
+                <span>Usage Analytics</span>
+            </button>
+
+            <button class="nav-item" data-page="bills">
+                <i class="ri-file-list-3-line"></i>
+                <span>Bills</span>
+            </button>
+
+            <p class="nav-label">SMART FEATURES</p>
+
+            <button class="nav-item" data-page="ai">
+                <i class="ri-brain-line"></i>
+                <span>AI Insights</span>
+                <span class="nav-new">AI</span>
+            </button>
+
+            <button class="nav-item" data-page="alerts">
+                <i class="ri-notification-3-line"></i>
+                <span>Alerts</span>
+                <span class="alert-count" id="sidebarAlertCount">3</span>
+            </button>
+
+            <button class="nav-item" data-page="simulator">
+                <i class="ri-cpu-line"></i>
+                <span>Meter Simulator</span>
+            </button>
+
+            <button class="nav-item" data-page="saving">
+                <i class="ri-leaf-line"></i>
+                <span>Water Saving</span>
+            </button>
+
+            <p class="nav-label">SYSTEM</p>
+
+            <button class="nav-item" data-page="settings">
+                <i class="ri-settings-4-line"></i>
+                <span>Settings</span>
+            </button>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="sidebar-user">
+
+                <div class="user-avatar" id="sidebarAvatar">
+                    C
+                </div>
+
+                <div class="sidebar-user-info">
+                    <strong id="sidebarUserName">Customer</strong>
+                    <span id="sidebarUserRole">Consumer</span>
+                </div>
+
+                <button
+                    class="logout-icon"
+                    id="logoutBtn"
+                    title="Logout"
+                >
+                    <i class="ri-logout-box-r-line"></i>
+                </button>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+
+    <main class="main-content">
+
+        <!-- HEADER -->
+
+        <header class="top-header">
+
+            <div class="header-left">
+
+                <button
+                    class="mobile-menu"
+                    id="mobileMenu"
+                >
+                    <i class="ri-menu-line"></i>
+                </button>
+
+                <div>
+
+                    <h1 id="pageTitle">
+                        Dashboard
+                    </h1>
+
+                    <p id="pageSubtitle">
+                        Monitor your water usage and billing
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="header-right">
+
+                <div class="header-status">
+
+                    <span class="live-dot"></span>
+
+                    Meter Online
+
+                </div>
+
+
+                <button
+                    class="icon-btn"
+                    id="notificationBtn"
+                    title="Notifications"
+                >
+
+                    <i class="ri-notification-3-line"></i>
+
+                    <span
+                        class="notification-dot"
+                        id="notificationDot"
+                    ></span>
+
+                </button>
+
+
+                <button
+                    class="icon-btn"
+                    id="themeToggle"
+                    title="Toggle theme"
+                >
+
+                    <i class="ri-moon-line"></i>
+
+                </button>
+
+
+                <div class="header-avatar" id="headerAvatar">
+                    C
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- =====================================================
+             DASHBOARD
+        ====================================================== -->
+
+        <section
+            class="page-section active"
+            id="page-dashboard"
+        >
+
+            <div class="welcome-banner">
+
+                <div>
+
+                    <span class="banner-label">
+                        SMART WATER MANAGEMENT
+                    </span>
+
+                    <h2>
+                        Good day, <span id="welcomeName">Customer</span> 👋
+                    </h2>
+
+                    <p>
+                        Here's your latest water usage and billing overview.
+                    </p>
+
+                </div>
+
+                <div class="banner-water">
+
+                    <i class="ri-water-flash-fill"></i>
+
+                </div>
+
+            </div>
+
+
+            <!-- STAT CARDS -->
+
+            <div class="stats-grid">
+
+                <div class="stat-card blue">
+
+                    <div class="stat-top">
+
+                        <div class="stat-icon">
+                            <i class="ri-water-flash-line"></i>
+                        </div>
+
+                        <span class="stat-badge positive">
+                            <i class="ri-arrow-down-line"></i>
+                            8.4%
+                        </span>
+
+                    </div>
+
+                    <p>Current Usage</p>
+
+                    <h3>
+                        <span id="currentUsage">18.4</span>
+                        <small>KL</small>
+                    </h3>
+
+                    <span class="stat-footer">
+                        This month
+                    </span>
+
+                </div>
+
+
+                <div class="stat-card purple">
+
+                    <div class="stat-top">
+
+                        <div class="stat-icon">
+                            <i class="ri-bill-line"></i>
+                        </div>
+
+                        <span class="stat-badge neutral">
+                            Estimated
+                        </span>
+
+                    </div>
+
+                    <p>Current Bill</p>
+
+                    <h3>
+                        ₹<span id="currentBill">642</span>
+                    </h3>
+
+                    <span class="stat-footer">
+                        Due in 8 days
+                    </span>
+
+                </div>
+
+
+                <div class="stat-card green">
+
+                    <div class="stat-top">
+
+                        <div class="stat-icon">
+                            <i class="ri-leaf-line"></i>
+                        </div>
+
+                        <span class="stat-badge positive">
+                            Excellent
+                        </span>
+
+                    </div>
+
+                    <p>Water Score</p>
+
+                    <h3>
+                        <span id="waterScore">87</span>
+                        <small>/100</small>
+                    </h3>
+
+                    <span class="stat-footer">
+                        Better than 72% of users
+                    </span>
+
+                </div>
+
+
+                <div class="stat-card orange">
+
+                    <div class="stat-top">
+
+                        <div class="stat-icon">
+                            <i class="ri-speed-up-line"></i>
+                        </div>
+
+                        <span class="stat-badge live">
+                            LIVE
+                        </span>
+
+                    </div>
+
+                    <p>Flow Rate</p>
+
+                    <h3>
+                        <span id="flowRateDisplay">4.2</span>
+                        <small>L/min</small>
+                    </h3>
+
+                    <span class="stat-footer">
+                        Meter #AQ-20481
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- DASHBOARD GRID -->
+
+            <div class="dashboard-grid">
+
+                <!-- USAGE CHART -->
+
+                <div class="card chart-card large-card">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <h3>
+                                Water Consumption
+                            </h3>
+
+                            <p>
+                                Monthly usage overview
+                            </p>
+
+                        </div>
+
+                        <select id="chartPeriod">
+
+                            <option value="6">
+                                Last 6 months
+                            </option>
+
+                            <option value="12">
+                                Last 12 months
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="chart-container">
+
+                        <canvas id="usageChart"></canvas>
+
+                    </div>
+
+                </div>
+
+
+                <!-- AI PREDICTION -->
+
+                <div class="card prediction-card">
+
+                    <div class="card-header">
+
+                        <div class="ai-title">
+
+                            <div class="ai-icon">
+                                <i class="ri-brain-line"></i>
+                            </div>
+
+                            <div>
+
+                                <h3>
+                                    AI Bill Prediction
+                                </h3>
+
+                                <p>
+                                    This month's forecast
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        <span class="confidence">
+                            94% confidence
+                        </span>
+
+                    </div>
+
+
+                    <div class="prediction-amount">
+
+                        <span>Predicted bill</span>
+
+                        <strong>
+                            ₹<span id="predictedBill">688</span>
+                        </strong>
+
+                    </div>
+
+
+                    <div class="prediction-progress">
+
+                        <div class="prediction-label">
+
+                            <span>
+                                Current usage
+                            </span>
+
+                            <span id="predictionUsage">
+                                18.4 / 25 KL
+                            </span>
+
+                        </div>
+
+                        <div class="progress-bar">
+
+                            <div
+                                class="progress-fill"
+                                id="predictionProgress"
+                                style="width: 74%"
+                            ></div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="prediction-message">
+
+                        <i class="ri-lightbulb-flash-line"></i>
+
+                        <span>
+                            You're on track to stay within your usual monthly range.
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- LEAK DETECTION -->
+
+                <div class="card leak-card">
+
+                    <div class="card-header">
+
+                        <div class="ai-title">
+
+                            <div class="ai-icon leak">
+                                <i class="ri-search-eye-line"></i>
+                            </div>
+
+                            <div>
+
+                                <h3>
+                                    AI Leak Detection
+                                </h3>
+
+                                <p>
+                                    Smart flow analysis
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        <span
+                            class="status-pill safe"
+                            id="leakStatus"
+                        >
+                            <i class="ri-check-line"></i>
+                            No Leak
+                        </span>
+
+                    </div>
+
+
+                    <div class="leak-meter">
+
+                        <div class="leak-circle safe-circle">
+
+                            <div>
+
+                                <strong id="leakConfidence">
+                                    96%
+                                </strong>
+
+                                <span>
+                                    confidence
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <p class="leak-description" id="leakDescription">
+
+                        Water flow pattern is normal.
+                        No continuous abnormal usage detected.
+
+                    </p>
+
+
+                    <button
+                        class="outline-btn full"
+                        data-page="ai"
+                    >
+
+                        View AI Analysis
+
+                        <i class="ri-arrow-right-line"></i>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- SECOND ROW -->
+
+            <div class="dashboard-grid second-grid">
+
+                <!-- ALERTS -->
+
+                <div class="card">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <h3>
+                                Recent Alerts
+                            </h3>
+
+                            <p>
+                                Latest system notifications
+                            </p>
+
+                        </div>
+
+                        <button
+                            class="text-btn"
+                            data-page="alerts"
+                        >
+                            View all
+                        </button>
+
+                    </div>
+
+                    <div
+                        class="alert-list compact"
+                        id="dashboardAlerts"
+                    ></div>
+
+                </div>
+
+
+                <!-- METER INFO -->
+
+                <div class="card">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <h3>
+                                Meter Information
+                            </h3>
+
+                            <p>
+                                Smart meter details
+                            </p>
+
+                        </div>
+
+                        <span class="online-badge">
+                            <span class="live-dot"></span>
+                            Online
+                        </span>
+
+                    </div>
+
+                    <div class="meter-details">
+
+                        <div class="meter-detail">
+
+                            <span>
+                                Meter Number
+                            </span>
+
+                            <strong>
+                                AQ-20481
+                            </strong>
+
+                        </div>
+
+                        <div class="meter-detail">
+
+                            <span>
+                                Last Reading
+                            </span>
+
+                            <strong id="lastReading">
+                                14,500 L
+                            </strong>
+
+                        </div>
+
+                        <div class="meter-detail">
+
+                            <span>
+                                Last Updated
+                            </span>
+
+                            <strong id="lastUpdated">
+                                Just now
+                            </strong>
+
+                        </div>
+
+                        <div class="meter-detail">
+
+                            <span>
+                                Connection
+                            </span>
+
+                            <strong class="green-text">
+                                Smart Meter
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- QUICK ACTIONS -->
+
+            <div class="quick-actions">
+
+                <button class="quick-action" data-page="simulator">
+
+                    <div class="quick-icon blue-bg">
+                        <i class="ri-cpu-line"></i>
+                    </div>
+
+                    <div>
+                        <strong>Simulate Reading</strong>
+                        <span>Test smart meter data</span>
+                    </div>
+
+                    <i class="ri-arrow-right-s-line"></i>
+
+                </button>
+
+
+                <button class="quick-action" data-page="bills">
+
+                    <div class="quick-icon purple-bg">
+                        <i class="ri-file-list-3-line"></i>
+                    </div>
+
+                    <div>
+                        <strong>View Bills</strong>
+                        <span>Check billing history</span>
+                    </div>
+
+                    <i class="ri-arrow-right-s-line"></i>
+
+                </button>
+
+
+                <button class="quick-action" data-page="saving">
+
+                    <div class="quick-icon green-bg">
+                        <i class="ri-leaf-line"></i>
+                    </div>
+
+                    <div>
+                        <strong>Save Water</strong>
+                        <span>Get smart recommendations</span>
+                    </div>
+
+                    <i class="ri-arrow-right-s-line"></i>
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             USAGE ANALYTICS
+        ====================================================== -->
+
+        <section
+            class="page-section"
+            id="page-usage"
+        >
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>
+                        Usage Analytics
+                    </h2>
+
+                    <p>
+                        Understand your water consumption patterns.
+                    </p>
+
+                </div>
+
+                <button
+                    class="primary-btn"
+                    data-page="simulator"
+                >
+                    <i class="ri-play-circle-line"></i>
+                    Run Simulation
+                </button>
+
+            </div>
+
+
+            <div class="analytics-grid">
+
+                <div class="card chart-card analytics-main">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <h3>
+                                Consumption Trend
+                            </h3>
+
+                            <p>
+                                Monthly water consumption in KL
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="chart-container tall">
+
+                        <canvas id="analyticsChart"></canvas>
+
+                    </div>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <h3>
+                                Usage Breakdown
+                            </h3>
+
+                            <p>
+                                Estimated household usage
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="usage-breakdown">
+
+                        <div class="breakdown-item">
+
+                            <div class="breakdown-info">
+
+                                <span>
+                                    Bathroom
+                                </span>
+
+                                <strong>
+                                    38%
+                                </strong>
+
+                            </div>
+
+                            <div class="breakdown-bar">
+                                <span style="width:38%"></span>
+                            </div>
+
+                        </div>
+
+
+                        <div class="breakdown-item">
+
+                            <div class="breakdown-info">
+
+                                <span>
+                                    Kitchen
+                                </span>
+
+                                <strong>
+                                    24%
+                                </strong>
+
+                            </div>
+
+                            <div class="breakdown-bar">
+                                <span style="width:24%"></span>
+                            </div>
+
+                        </div>
+
+
+                        <div class="breakdown-item">
+
+                            <div class="breakdown-info">
+
+                                <span>
+                                    Laundry
+                                </span>
+
+                                <strong>
+                                    19%
+                                </strong>
+
+                            </div>
+
+                            <div class="breakdown-bar">
+                                <span style="width:19%"></span>
+                            </div>
+
+                        </div>
+
+
+                        <div class="breakdown-item">
+
+                            <div class="breakdown-info">
+
+                                <span>
+                                    Cleaning
+                                </span>
+
+                                <strong>
+                                    11%
+                                </strong>
+
+                            </div>
+
+                            <div class="breakdown-bar">
+                                <span style="width:11%"></span>
+                            </div>
+
+                        </div>
+
+
+                        <div class="breakdown-item">
+
+                            <div class="breakdown-info">
+
+                                <span>
+                                    Other
+                                </span>
+
+                                <strong>
+                                    8%
+                                </strong>
+
+                            </div>
+
+                            <div class="breakdown-bar">
+                                <span style="width:8%"></span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="stats-grid three">
+
+                <div class="metric-card">
+
+                    <i class="ri-arrow-down-double-line"></i>
+
+                    <span>Lowest Month</span>
+
+                    <strong>14.2 KL</strong>
+
+                    <small>February 2026</small>
+
+                </div>
+
+
+                <div class="metric-card">
+
+                    <i class="ri-bar-chart-line"></i>
+
+                    <span>Average Usage</span>
+
+                    <strong id="averageUsage">17.8 KL</strong>
+
+                    <small>Last 6 months</small>
+
+                </div>
+
+
+                <div class="metric-card">
+
+                    <i class="ri-arrow-up-double-line"></i>
+
+                    <span>Highest Month</span>
+
+                    <strong>22.1 KL</strong>
+
+                    <small>June 2026</small>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             BILLS
+        ====================================================== -->
+
+        <section
+            class="page-section"
+            id="page-bills"
+        >
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>
+                        Bills & Payments
+                    </h2>
+
+                    <p>
+                        View your water bills and payment status.
+                    </p>
+
+                </div>
+
+                <button
+                    class="primary-btn"
+                    id="calculateBillBtn"
+                >
+                    <i class="ri-calculator-line"></i>
+                    Calculate Current Bill
+                </button>
+
+            </div>
+
+
+            <div class="bill-summary-grid">
+
+                <div class="bill-summary-card">
+
+                    <span>
+                        Current Estimate
+                    </span>
+
+                    <strong>
+                        ₹<span id="billPageAmount">642</span>
+                    </strong>
+
+                    <small>
+                        Based on current meter reading
+                    </small>
+
+                </div>
+
+
+                <div class="bill-summary-card purple">
+
+                    <span>
+                        Last Paid
+                    </span>
+
+                    <strong>
+                        ₹588
+                    </strong>
+
+                    <small>
+                        September 2026
+                    </small>
+
+                </div>
+
+
+                <div class="bill-summary-card green">
+
+                    <span>
+                        Payment Status
+                    </span>
+
+                    <strong class="paid-text">
+                        Paid
+                    </strong>
+
+                    <small>
+                        No overdue amount
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="card table-card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h3>
+                            Billing History
+                        </h3>
+
+                        <p>
+                            Recent water bills
+                        </p>
+
+                    </div>
+
+                    <button
+                        class="outline-btn"
+                        id="downloadBillBtn"
+                    >
+                        <i class="ri-download-line"></i>
+                        Download
+                    </button>
+
+                </div>
+
+
+                <div class="table-wrapper">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Bill No.</th>
+                                <th>Billing Period</th>
+                                <th>Consumption</th>
+                                <th>Amount</th>
+                                <th>Due Date</th>
+                                <th>Status</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="billTableBody">
+
+                            <tr>
+
+                                <td>
+                                    <strong>#AQ-0926</strong>
+                                </td>
+
+                                <td>Sep 2026</td>
+
+                                <td>16.8 KL</td>
+
+                                <td>₹588</td>
+
+                                <td>10 Oct 2026</td>
+
+                                <td>
+                                    <span class="table-status paid">
+                                        Paid
+                                    </span>
+                                </td>
+
+                            </tr>
+
+
+                            <tr>
+
+                                <td>
+                                    <strong>#AQ-0826</strong>
+                                </td>
+
+                                <td>Aug 2026</td>
+
+                                <td>17.2 KL</td>
+
+                                <td>₹602</td>
+
+                                <td>10 Sep 2026</td>
+
+                                <td>
+                                    <span class="table-status paid">
+                                        Paid
+                                    </span>
+                                </td>
+
+                            </tr>
+
+
+                            <tr>
+
+                                <td>
+                                    <strong>#AQ-0726</strong>
+                                </td>
+
+                                <td>Jul 2026</td>
+
+                                <td>19.4 KL</td>
+
+                                <td>₹674</td>
+
+                                <td>10 Aug 2026</td>
+
+                                <td>
+                                    <span class="table-status paid">
+                                        Paid
+                                    </span>
+                                </td>
+
+                            </tr>
+
+
+                            <tr>
+
+                                <td>
+                                    <strong>#AQ-0626</strong>
+                                </td>
+
+                                <td>Jun 2026</td>
+
+                                <td>22.1 KL</td>
+
+                                <td>₹742</td>
+
+                                <td>10 Jul 2026</td>
+
+                                <td>
+                                    <span class="table-status paid">
+                                        Paid
+                                    </span>
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             AI INSIGHTS
+        ====================================================== -->
+
+        <section
+            class="page-section"
+            id="page-ai"
+        >
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>
+                        AI Insights
+                    </h2>
+
+                    <p>
+                        Intelligent analysis of your simulated meter data.
+                    </p>
+
+                </div>
+
+                <span class="ai-powered-badge">
+                    <i class="ri-sparkling-2-fill"></i>
+                    AI Insight Engine
+                </span>
+
+            </div>
+
+
+            <div class="ai-grid">
+
+                <!-- LEAK -->
+
+                <div class="ai-feature-card leak-feature">
+
+                    <div class="feature-top">
+
+                        <div class="feature-icon">
+                            <i class="ri-search-eye-line"></i>
+                        </div>
+
+                        <span class="confidence">
+                            <span id="aiLeakConfidence">96%</span>
+                            confidence
+                        </span>
+
+                    </div>
+
+                    <h3>
+                        AI Leak Detection
+                    </h3>
+
+                    <p>
+                        Analyzes continuous flow, duration and consumption
+                        patterns to identify possible water leakage.
+                    </p>
+
+                    <div class="ai-result" id="aiLeakResult">
+
+                        <div class="result-icon safe">
+                            <i class="ri-check-line"></i>
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                No significant leak detected
+                            </strong>
+
+                            <span>
+                                Flow pattern is within the normal range.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="reason-box">
+
+                        <strong>
+                            Why?
+                        </strong>
+
+                        <p id="aiLeakReason">
+                            Flow rate is stable and no prolonged abnormal
+                            consumption has been detected.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- BILL PREDICTION -->
+
+                <div class="ai-feature-card bill-feature">
+
+                    <div class="feature-top">
+
+                        <div class="feature-icon">
+                            <i class="ri-line-chart-line"></i>
+                        </div>
+
+                        <span class="confidence">
+                            94% confidence
+                        </span>
+
+                    </div>
+
+                    <h3>
+                        AI Bill Prediction
+                    </h3>
+
+                    <p>
+                        Estimates end-of-month consumption and expected
+                        water bill from current usage patterns.
+                    </p>
+
+                    <div class="big-ai-number">
+
+                        <span>
+                            Predicted bill
+                        </span>
+
+                        <strong>
+                            ₹<span id="aiPredictedBill">688</span>
+                        </strong>
+
+                    </div>
+
+                    <div class="prediction-details">
+
+                        <div>
+                            <span>Expected usage</span>
+                            <strong id="aiExpectedUsage">22.1 KL</strong>
+                        </div>
+
+                        <div>
+                            <span>Current usage</span>
+                            <strong id="aiCurrentUsage">18.4 KL</strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ANOMALY -->
+
+                <div class="ai-feature-card anomaly-feature">
+
+                    <div class="feature-top">
+
+                        <div class="feature-icon">
+                            <i class="ri-radar-line"></i>
+                        </div>
+
+                        <span class="confidence">
+                            91% confidence
+                        </span>
+
+                    </div>
+
+                    <h3>
+                        Meter Anomaly Detection
+                    </h3>
+
+                    <p>
+                        Detects unusual readings, sudden jumps, reverse
+                        readings and possible meter tampering patterns.
+                    </p>
+
+                    <div class="ai-result" id="aiAnomalyResult">
+
+                        <div class="result-icon safe">
+                            <i class="ri-shield-check-line"></i>
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                No suspicious activity
+                            </strong>
+
+                            <span>
+                                Meter readings are consistent.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="reason-box">
+
+                        <strong>
+                            Current analysis
+                        </strong>
+
+                        <p id="aiAnomalyReason">
+                            Latest reading is consistent with previous
+                            meter history.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="card ai-explanation">
+
+                <div class="explanation-icon">
+                    <i class="ri-information-line"></i>
+                </div>
+
+                <div>
+
+                    <h3>
+                        How the AI demo works
+                    </h3>
+
+                    <p>
+                        This prototype uses simulated meter data and
+                        rule-based intelligence to demonstrate how AI
+                        features can work. In the final Java project,
+                        these modules can be replaced by trained ML
+                        models or an AI service connected to the
+                        Spring Boot backend.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             ALERTS
+        ====================================================== -->
+
+        <section
+            class="page-section"
+            id="page-alerts"
+        >
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>
+                        Alerts & Notifications
+                    </h2>
+
+                    <p>
+                        Monitor leakage, usage and meter alerts.
+                    </p>
+
+                </div>
+
+                <button
+                    class="outline-btn"
+                    id="clearAlertsBtn"
+                >
+                    <i class="ri-check-double-line"></i>
+                    Clear Resolved
+                </button>
+
+            </div>
+
+
+            <div class="alert-filters">
+
+                <button class="filter-btn active" data-filter="all">
+                    All
+                </button>
+
+                <button class="filter-btn" data-filter="leak">
+                    Leak
+                </button>
+
+                <button class="filter-btn" data-filter="usage">
+                    High Usage
+                </button>
+
+                <button class="filter-btn" data-filter="anomaly">
+                    Anomaly
+                </button>
+
+                <button class="filter-btn" data-filter="system">
+                    System
+                </button>
+
+            </div>
+
+
+            <div
+                class="full-alert-list"
+                id="fullAlertList"
+            ></div>
+
+        </section>
+
+
+        <!-- =====================================================
+             SIMULATOR
+        ====================================================== -->
+
+        <section
+            class="page-section"
+            id="page-simulator"
+        >
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>
+                        Smart Meter Simulator
+                    </h2>
+
+                    <p>
+                        Enter simulated readings and test the smart
+                        monitoring system.
+                    </p>
+
+                </div>
+
+                <span class="simulator-badge">
+                    <i class="ri-cpu-line"></i>
+                    Simulation Mode
+                </span>
+
+            </div>
+
+
+            <div class="simulator-layout">
+
+                <!-- INPUT -->
+
+                <div class="card simulator-input-card">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <h3>
+                                Meter Input
+                            </h3>
+
+                            <p>
+                                Enter simulated sensor values
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="scenario-buttons">
+
+                        <button
+                            class="scenario-btn normal"
+                            data-scenario="normal"
+                        >
+                            <i class="ri-check-line"></i>
+                            Normal
+                        </button>
+
+                        <button
+                            class="scenario-btn leak"
+                            data-scenario="leak"
+                        >
+                            <i class="ri-drop-line"></i>
+                            Leak
+                        </button>
+
+                        <button
+                            class="scenario-btn high"
+                            data-scenario="high"
+                        >
+                            <i class="ri-arrow-up-line"></i>
+                            High Usage
+                        </button>
+
+                        <button
+                            class="scenario-btn tampering"
+                            data-scenario="tampering"
+                        >
+                            <i class="ri-alert-line"></i>
+                            Tampering
+                        </button>
+
+                    </div>
+
+
+                    <div class="form-grid">
+
+                        <div class="form-field">
+
+                            <label>
+                                Previous Reading (L)
+                            </label>
+
+                            <input
+                                type="number"
+                                id="previousReadingInput"
+                                value="12000"
+                                min="0"
+                            >
+
+                        </div>
+
+
+                        <div class="form-field">
+
+                            <label>
+                                Current Reading (L)
+                            </label>
+
+                            <input
+                                type="number"
+                                id="currentReadingInput"
+                                value="14500"
+                                min="0"
+                            >
+
+                        </div>
+
+
+                        <div class="form-field">
+
+                            <label>
+                                Flow Rate (L/min)
+                            </label>
+
+                            <input
+                                type="number"
+                                id="flowRateInput"
+                                value="4.2"
+                                min="0"
+                                step="0.1"
+                            >
+
+                        </div>
+
+
+                        <div class="form-field">
+
+                            <label>
+                                Flow Duration (minutes)
+                            </label>
+
+                            <input
+                                type="number"
+                                id="durationInput"
+                                value="30"
+                                min="0"
+                            >
+
+                        </div>
+
+
+                        <div class="form-field full-field">
+
+                            <label>
+                                Simulation Scenario
+                            </label>
+
+                            <select id="scenarioInput">
+
+                                <option value="normal">
+                                    Normal Usage
+                                </option>
+
+                                <option value="leak">
+                                    Possible Leak
+                                </option>
+
+                                <option value="high">
+                                    High Water Usage
+                                </option>
+
+                                <option value="tampering">
+                                    Possible Meter Tampering
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="simulator-actions">
+
+                        <button
+                            class="primary-btn large"
+                            id="runSimulationBtn"
+                        >
+                            <i class="ri-play-fill"></i>
+                            Generate Reading
+                        </button>
+
+                        <button
+                            class="outline-btn large"
+                            id="resetSimulationBtn"
+                        >
+                            <i class="ri-refresh-line"></i>
+                            Reset
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- RESULT -->
+
+                <div class="card simulation-result-card">
+
+                    <div class="simulation-live">
+
+                        <span class="live-dot"></span>
+
+                        LIVE SIMULATION
+
+                    </div>
+
+
+                    <div class="meter-display">
+
+                        <span>
+                            CURRENT METER READING
+                        </span>
+
+                        <strong id="simulatedReading">
+                            14,500
+                        </strong>
+
+                        <small>
+                            Litres
+                        </small>
+
+                    </div>
+
+
+                    <div class="simulation-metrics">
+
+                        <div>
+
+                            <span>
+                                Consumption
+                            </span>
+
+                            <strong id="simConsumption">
+                                2.50 KL
+                            </strong>
+
+                        </div>
+
+                        <div>
+
+                            <span>
+                                Flow Rate
+                            </span>
+
+                            <strong id="simFlow">
+                                4.2 L/min
+                            </strong>
+
+                        </div>
+
+                        <div>
+
+                            <span>
+                                Estimated Bill
+                            </span>
+
+                            <strong id="simBill">
+                                ₹642
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="simulation-analysis">
+
+                        <h4>
+                            System Analysis
+                        </h4>
+
+                        <div
+                            id="simulationResult"
+                            class="analysis-status safe"
+                        >
+
+                            <i class="ri-shield-check-line"></i>
+
+                            <div>
+
+                                <strong>
+                                    Normal reading
+                                </strong>
+
+                                <span>
+                                    No immediate issue detected.
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="scenario-info">
+
+                <div>
+                    <i class="ri-lightbulb-flash-line"></i>
+                </div>
+
+                <div>
+
+                    <strong>
+                        Try the different scenarios
+                    </strong>
+
+                    <p>
+                        Select <b>Leak</b>, <b>High Usage</b> or
+                        <b>Tampering</b> to see how the monitoring
+                        and AI insight system responds.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             WATER SAVING
+        ====================================================== -->
+
+        <section
+            class="page-section"
+            id="page-saving"
+        >
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>
+                        Water Saving
+                    </h2>
+
+                    <p>
+                        Smart recommendations to reduce consumption.
+                    </p>
+
+                </div>
+
+                <div class="saving-score">
+                    <i class="ri-leaf-fill"></i>
+                    87/100
+                </div>
+
+            </div>
+
+
+            <div class="saving-grid">
+
+                <div class="card conservation-card">
+
+                    <div class="conservation-ring">
+
+                        <div>
+
+                            <strong>
+                                87
+                            </strong>
+
+                            <span>
+                                Water Score
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <h3>
+                        Excellent Conservation
+                    </h3>
+
+                    <p>
+                        Your current consumption is better than the
+                        average household in your comparison group.
+                    </p>
+
+                </div>
+
+
+                <div class="recommendations">
+
+                    <div class="recommendation">
+
+                        <div class="recommendation-icon blue-bg">
+                            <i class="ri-drop-line"></i>
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Reduce shower time
+                            </h3>
+
+                            <p>
+                                Reducing shower time by 3 minutes could
+                                save around 1,200 L per month.
+                            </p>
+
+                        </div>
+
+                        <span class="saving-tag">
+                            -1.2 KL
+                        </span>
+
+                    </div>
+
+
+                    <div class="recommendation">
+
+                        <div class="recommendation-icon green-bg">
+                            <i class="ri-tools-line"></i>
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Check tap fittings
+                            </h3>
+
+                            <p>
+                                A small dripping tap can waste hundreds
+                                of litres every month.
+                            </p>
+
+                        </div>
+
+                        <span class="saving-tag">
+                            Prevent loss
+                        </span>
+
+                    </div>
+
+
+                    <div class="recommendation">
+
+                        <div class="recommendation-icon purple-bg">
+                            <i class="ri-recycle-line"></i>
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Reuse suitable water
+                            </h3>
+
+                            <p>
+                                Reusing water from selected household
+                                activities can lower fresh water demand.
+                            </p>
+
+                        </div>
+
+                        <span class="saving-tag">
+                            Eco
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="card what-if-card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h3>
+                            What-If Water Saving Simulator
+                        </h3>
+
+                        <p>
+                            See how much your estimated bill could change.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="what-if-content">
+
+                    <div class="slider-area">
+
+                        <label>
+                            Reduce monthly usage by
+                            <strong id="savingPercentDisplay">
+                                10%
+                            </strong>
+                        </label>
+
+                        <input
+                            type="range"
+                            id="savingSlider"
+                            min="0"
+                            max="50"
+                            value="10"
+                        >
+
+                        <div class="slider-labels">
+
+                            <span>0%</span>
+                            <span>25%</span>
+                            <span>50%</span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="what-if-result">
+
+                        <div>
+                            <span>Current bill</span>
+                            <strong>₹<span id="whatCurrentBill">642</span></strong>
+                        </div>
+
+                        <i class="ri-arrow-right-line"></i>
+
+                        <div>
+                            <span>Potential bill</span>
+                            <strong class="green-text">
+                                ₹<span id="whatNewBill">578</span>
+                            </strong>
+                        </div>
+
+                        <div class="saving-highlight">
+                            Save ₹<span id="whatSaving">64</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             SETTINGS
+        ====================================================== -->
+
+        <section
+            class="page-section"
+            id="page-settings"
+        >
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>
+                        Settings
+                    </h2>
+
+                    <p>
+                        Manage your prototype preferences.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="settings-grid">
+
+                <div class="card settings-card">
+
+                    <div class="settings-icon">
+                        <i class="ri-contrast-2-line"></i>
+                    </div>
+
+                    <div class="setting-info">
+
+                        <h3>
+                            Appearance
+                        </h3>
+
+                        <p>
+                            Switch between light and dark themes.
+                        </p>
+
+                    </div>
+
+                    <button
+                        class="toggle-switch"
+                        id="settingsThemeToggle"
+                    >
+                        <span></span>
+                    </button>
+
+                </div>
+
+
+                <div class="card settings-card">
+
+                    <div class="settings-icon">
+                        <i class="ri-notification-3-line"></i>
+                    </div>
+
+                    <div class="setting-info">
+
+                        <h3>
+                            Notifications
+                        </h3>
+
+                        <p>
+                            Receive simulated alerts and meter warnings.
+                        </p>
+
+                    </div>
+
+                    <button
+                        class="toggle-switch active"
+                        id="notificationToggle"
+                    >
+                        <span></span>
+                    </button>
+
+                </div>
+
+
+                <div class="card settings-card">
+
+                    <div class="settings-icon">
+                        <i class="ri-database-2-line"></i>
+                    </div>
+
+                    <div class="setting-info">
+
+                        <h3>
+                            Simulation Data
+                        </h3>
+
+                        <p>
+                            Reset prototype meter and alert data.
+                        </p>
+
+                    </div>
+
+                    <button
+                        class="outline-btn"
+                        id="resetAllDataBtn"
+                    >
+                        Reset Data
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="card about-card">
+
+                <div class="about-logo">
+                    <i class="ri-drop-fill"></i>
+                </div>
+
+                <div>
+
+                    <h2>
+                        AquaSmart
+                    </h2>
+
+                    <p>
+                        Smart Water Billing System
+                    </p>
+
+                    <small>
+                        Java Programming Project Prototype
+                    </small>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div id="toastContainer"></div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
